@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k8local
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/b1ttytang3r/kube_local
+    targetRevision: HEAD
+    path: yaml
+    directory:
+      recurse: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argocd
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
